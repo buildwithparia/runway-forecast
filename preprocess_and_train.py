@@ -1,3 +1,6 @@
+
+#well after creating the dataset is the time to picking some features and train the model
+
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -5,56 +8,67 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.metrics import mean_absolute_error, r2_score
 
-# okay deep breath... training the model here
-# not perfect but works for now
+# alright... deep breath 😅 
+# not the cleanest setup ever but it's my style
 
-# 🧵 load my fashion trend data
-data = pd.read_csv("runway_trends.csv")
+# 👗 loading the trend dataset I made earlier
+df = pd.read_csv("runway_trends.csv")
 
-# peek at the data (I keep doing this out of habit lol)
-print("\n👀 First few rows:")
-print(data.head(3))
+# I just always like checking the top
+print("\n👀 Sample rows:")
+print(df.head(3)) #3 of them is enough 
 
-# sanity check – are we missing anything?
-print("\n🕵️‍♀️ Null value count:")
-print(data.isnull().sum())
+# we need to always check if there is a missing value or not
+# Even supermodels can't slay without clean data 💁‍♀️ (yes that was a fashion pun 👀)
+print("\n🚨 Nulls?? (pls no):")
+print(df.isnull().sum())
 
-# ✂️ Features we’ll use (both numbers + categories)
-# might add more features later but this is fine for now
-features_raw = data[["Previous Popularity", "Social Buzz", "Category", "Color", "Fabric"]]
-target = data["Trend Score"]
+# picking some features - always remember choose the most related one not just the random stuff
+# might add more later if I get curious
+raw_features = df[["Previous Popularity", "Social Buzz", "Category", "Color", "Fabric"]]
+target_vals = df["Trend Score"]
 
-# one-hot encode the categorical stuff
-cat_cols = ["Category", "Color", "Fabric"]
-encoder = OneHotEncoder(sparse=False, handle_unknown='ignore')
-cat_encoded = encoder.fit_transform(features_raw[cat_cols])
+# okay here we encode our data. it's an essential because we want to transform categorical data into a format that ML models can easily understand and use
+# and yeah, I use one-hot encoding because ML models only deal with numbers — not words
+#label encoding isn't suitable for nomial data
+#ordinal encoding isn't suitable too because we don't have a order
+categoricals = ["Category", "Color", "Fabric"]
+encoder = OneHotEncoder(sparse=False, handle_unknown='ignore')  # don't break on weird values
+encoded_cats = encoder.fit_transform(raw_features[categoricals])
 
-# 👾 Combine it with numeric features
-num_vals = features_raw[["Previous Popularity", "Social Buzz"]].values
-X_full = np.hstack((num_vals, cat_encoded))
+# combine numeric + encoded bits
+# well now we grab numeric values and trun them into NumPy array because sklearn love NumPy more than pandas
+#why? I tell you ( because I like to explain everything in case of someone need it)
+#first of all NumPy is pandas older sister so sklearn's core functions were built to expect NumPy arrays
+#second sklearn just want numbers but pandas dataframes have labels,column names,etc it's actually good for human but not for models
+numerics = raw_features[["Previous Popularity", "Social Buzz"]].values
+X = np.hstack((numerics, encoded_cats))
 
-# 😮 print just to check shape — I always do this
-print(f"\n🔢 Encoded features shape: {X_full.shape}")
+# I always print shapes, it's just a habit and you know it's the quickest sanity check to check everything combined in the right way
+print(f"\n📐 Feature matrix shape: {X.shape}")
 
-# train/test split — might try different test sizes later
+# split it up! we split our data into 2 sets, one training set and one testing set and we said to use 20% of our data as testing set
+# but we can use other numbers too! but this 20/80 is a popular default
 X_train, X_test, y_train, y_test = train_test_split(
-    X_full, target, test_size=0.2, random_state=42
+    X, target_vals, test_size=0.2, random_state=42
 )
 
-# model timeee
+# linear model feels chill for now! 
+# linear regression is fast,easy and gives us a baseline and it works well with numeric + one-hot features
+# we can use other models too, we can upgrade ours to random forests
 model = LinearRegression()
 model.fit(X_train, y_train)
 
-# predict on the test set, cross fingers 🤞
+# okay let’s see how this goes... 
 y_pred = model.predict(X_test)
 
-# 💅 Performance check (so far so good)
+# some metrics that basic but important! this is our model report card!
 mae = mean_absolute_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
-print("\n📈 Model evaluation:")
-print(f"📉 MAE (mean absolute error): {mae:.2f}")
-print(f"📊 R² Score: {r2:.2f}")
+print("\n📊 Model Results:")
+print(f"👉 Mean Absolute Error: {mae:.2f}") #It's the average amount your predictions are off, if it's 0 well our model can read minds! if it's low it's really good but when it's high so we might need to improve girl
+print(f"👉 R² Score: {r2:.2f}") #It's coefficient of determination, it measures how well our predictions explain the variance in the data, in my language how much of the trend score magic did I capture?
 
-# could add visualizations later but I’m lazy rn
-# might also save the model but meh
+# NOTE: didn’t save the model yet, maybe later if this turns out useful
+#TODO: might add visual plots someday

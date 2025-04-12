@@ -1,11 +1,13 @@
+#well well well! welcome to my fashion show!
+#first step is making our dataset, we need to feed our future model
 import pandas as pd
 import random
 
-# okay this is me making my own little fashion trend dataset
-# no API, just vibes & coffee ☕✨
+# okay so this is just me making my fake vogue ☕💅
+# It's way better if I had access to real-life database but well...🚶‍♀️
 
-# 🍒 style ideas I like or see trending online
-items = [
+# 🌈 trend pieces I’ve seen all over my feed and pinterest that give ~main character energy~
+style_pieces = [
     ("Denim Mini Skirt", "Bottom", "Blue", "Denim"),
     ("Leather Trench Coat", "Outerwear", "Brown", "Leather"),
     ("Crochet Top", "Top", "White", "Cotton"),
@@ -25,32 +27,41 @@ items = [
     ("Sequin Crop Top", "Top", "Silver", "Sequin"),
     ("Faux Fur Coat", "Outerwear", "Ivory", "Faux Fur"),
     ("Wide-Leg Trousers", "Bottom", "Camel", "Linen"),
-    ("Statement Belt", "Accessory", "Gold", "Metal")
+    ("Statement Belt", "Accessory", "Gold", "Metal"),
 ]
 
-# seasonal range – SS = spring/summer, FW = fall/winter
-# kind of just made these up to cover a few years
-seasons = ["SS21", "FW21", "SS22", "FW22", "SS23", "FW23", "SS24", "FW24", "SS25"]
+# I kinda just made these up to span a few seasons – could expand later
+seasons_list = ["SS21", "FW21", "SS22", "FW22", "SS23", "FW23", "SS24", "FW24", "SS25"]
 
-data_rows = []
+fashion_data = []  # gonna fill this with fake but fabulous rows
 
-# loop over each season & item combo to make fake data
-for szn in seasons:
-    for piece in items:
-        pop_score = round(random.uniform(3.5, 9.5), 1)  # 0-10 scale
-        buzz_val = random.randint(20, 100)              # like social media mentions
-        # mix the two + a little randomness to simulate "trend score"
-        trend_score = round((pop_score * 0.55 + buzz_val * 0.045) + random.uniform(-0.5, 0.5), 1)
+# well we have to make our dataset. but how? we create a loop that go through each season+item and giving it a vibe score
+for season in seasons_list:
+    for item in style_pieces:
+        # popularity is like general likability or wearability
+        popularity_score = round(random.uniform(3.5, 9.5), 1) #I want to avoid totally hated items and I think every piece is kinda wearable so I concider 3.5 as minimum
 
-        row = [szn, *piece, pop_score, buzz_val, trend_score]
-        data_rows.append(row)
+        # buzz = how much peopl are *talking* about it, like on TikTok or IG or pinterest
+        social_buzz = random.randint(20, 100)
 
-# 🧃 toss it all into a DataFrame
-df = pd.DataFrame(data_rows, columns=[
+        # here it's the time to mash them together for a ~trend score~
+        vibe_score = (popularity_score * 0.55) + (social_buzz * 0.045)
+        vibe_score += random.uniform(-0.5, 0.5)  # sprinkle in a little chaos
+        vibe_score = round(vibe_score, 1)
+
+        # and here all of our individual ingredients come together into a structured format
+        # kinda heart of our dataset building magic ✨
+        entry = [season] + list(item) + [popularity_score, social_buzz, vibe_score]
+        fashion_data.append(entry)
+
+# This line is like putting our data in a spreadsheet and giving each column its name tag so we can gaze upon our creation🎀
+df = pd.DataFrame(fashion_data, columns=[
     "Season", "Trend Item", "Category", "Color", "Fabric",
     "Previous Popularity", "Social Buzz", "Trend Score"
 ])
 
-# save it out – maybe change the filename later?
+# write it to a file – name might change later if I make new versions!
 df.to_csv("runway_trends.csv", index=False)
+
+# feels good, honestly
 print("✅ Done! Your handmade fashion dataset is ready 💅 (runway_trends.csv)")
