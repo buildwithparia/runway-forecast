@@ -32,22 +32,34 @@ I'm here to learn and grow not to always be perfect.
 ## 💻 how it works
 
 Each item has some features:
- 👗	Season : from spring/summer 2021 until spring/summer 2025
- 👔	Trend item : like “maxi skirt” or “platform boots”
- 🧥	Category : like “bottom” or “accessory”
- 👚	Color : like “navy” or “blush”
- 👖	Fabric : like “denim” or “satin”
- 👟	Previous popularity : it’s a random number between 3.5 to 9.5 , it’s a score that reflects how popular or wearable a fashion item already is based on past seasons, general style trends or its reputation
- 👜	Social buzz : randomly generated between 20 and 100 , it represents how much people are talking about a fashion item like on IG and pinterest
- 🧢	Trend score : this number calculated using a custom formula based on previous popularity, social buzz and a bit of chaos to make it feel more real like this:
-                   Trend Score = (Popularity × 0.55) + (Buzz × 0.045) + Chaos (±0.5)
 
-I used one-hot encoding, it’s the best option compare to the label encoding or other types of encoding because I deal with numbers in this project not words.
-And trained a linear regression model because it can work very well with numeral and one-hot features.
-The model works very well and got these metrics:
-🧷	Mean Absolute Error = 0.27
-🧷	R2 = 0.96
-The model can’t read minds but I think it works good🤷🏻
+- 🔥 **Season**: from Spring/Summer 2021 until Spring/Summer 2025  
+- 👗 **Trend Item**: like “maxi skirt” or “platform boots”  
+- 🧳 **Category**: like “bottom” or “accessory”  
+- 👚 **Color**: like “navy” or “blush”  
+- 🧵 **Fabric**: like “denim” or “satin”  
+- 🌀 **Previous Popularity**:  
+  a random number between 3.5 and 9.5 — reflects how popular or wearable a fashion item already is  
+  (based on past seasons, general style trends, or just its reputation)  
+- 📢 **Social Buzz**:  
+  a number from 20 to 100 — represents how much people are talking about the item on IG, TikTok, Pinterest, etc.  
+- ✨ **Trend Score**:  
+  this is a “vibe” score calculated from all the features above using this formula:
+
+  > *Trend Score = (Popularity × 0.55) + (Buzz × 0.045) + Chaos (±0.5)*
+
+
+---
+I used **one-hot encoding** because I’m working with labels like color and fabric, not numbers.  
+It’s better than label or ordinal encoding in this case.
+
+I trained a **linear regression model** because it works well with numerical + encoded features.  
+The model did a good job and got these results:
+
+- 📊 **Mean Absolute Error**: 0.27  
+- 📊 **R² Score**: 0.96
+
+The model can’t read minds… but I think it works pretty well! 🧙‍♀️
 
 
 
@@ -90,3 +102,4 @@ this was more about learning and having fun than being perfect🌠
 
 [@buildwithparia](https://github.com/buildwithparia)  
 Built by Paria with Python, style, and Pinterest scrolls at 2am 💗
+
