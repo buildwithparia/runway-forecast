@@ -1,44 +1,55 @@
 # 🧵 Runway Forecast
 
-okay so... I tried to predict fashion trends using Python and it kinda worked?? 💅
+One of the most fun experiment during my machine learning journey...sewing fashion and technology 🪡
+
 
 ---
-
 ## ❓ what is this?
 
 this started as me wondering:  
 > *“what if I could predict what’s gonna be trendy next season?”*
 
-so I made a mini dataset of fashion items over the past few years (fake-ish but based on real vibes), then trained a machine learning model to predict which ones might blow up in **Fall/Winter 2025**.
+This project predict trend scores for fashion pieces based on their popularity, social buzz and aesthetic elements like fabric, color and category.
+It includes:
+- A handmade dataset of +180 fashion items across 4 seasons
+- A linear regression model trained to learn the ~vibe score~
+- A fun prediction for upcoming FW2025 fashion trends
 
-it's not perfect but I'm proud of it.  
-it's ✨aesthetic meets data science✨.
+It's not perfect but I'm proud of it. ✨
+I'm here to learn and grow not to always be perfect.
 
 ---
 
 ## ❓ what’s in the project
 
-- `runway_trends.py` → script to generate my fashion trend dataset (completely made up lol)
+- `runway_trends.py` → generates the fashion dataset (my fake Vouge universe💫)
 - `runway_trends.csv` → the dataset with items, colors, fabrics, popularity, buzz, etc.
-- `preprocess_and_train.py` → trained a linear regression model. kinda works shockingly well??
-- `predict_fw25.py` → gives me a ranked list of what might trend in FW25 🧥🧶
+- `preprocess_and_train.py` → trains & evaluates the model on trend data
+- `predict_fw25.py` → predicts trend scores for totally new FW25 items 🧥🧶
 
 ---
 
 ## 💻 how it works
 
-- each item has:
-  - season (`SS21` to `SS25`)
-  - trend item (like “Velvet Cape” or “Metallic Puffer”)
-  - category, color, fabric
-  - past popularity score (randomized-ish)
-  - social media buzz (randomly generated between 20 and 100)
-  - and a made-up trend score
+Each item has some features:
+ 👗	Season : from spring/summer 2021 until spring/summer 2025
+ 👔	Trend item : like “maxi skirt” or “platform boots”
+ 🧥	Category : like “bottom” or “accessory”
+ 👚	Color : like “navy” or “blush”
+ 👖	Fabric : like “denim” or “satin”
+ 👟	Previous popularity : it’s a random number between 3.5 to 9.5 , it’s a score that reflects how popular or wearable a fashion item already is based on past seasons, general style trends or its reputation
+ 👜	Social buzz : randomly generated between 20 and 100 , it represents how much people are talking about a fashion item like on IG and pinterest
+ 🧢	Trend score : this number calculated using a custom formula based on previous popularity, social buzz and a bit of chaos to make it feel more real like this:
+                   Trend Score = (Popularity × 0.55) + (Buzz × 0.045) + Chaos (±0.5)
 
-- I used one-hot encoding for the categorical stuff
-- combined with numerical features (`Previous Popularity`, `Social Buzz`)
-- trained a linear regression model using `scikit-learn`
-- model got like 0.28 MAE and 0.95 R² so... not bad?? 🤷‍♀️
+I used one-hot encoding, it’s the best option compare to the label encoding or other types of encoding because I deal with numbers in this project not words.
+And trained a linear regression model because it can work very well with numeral and one-hot features.
+The model works very well and got these metrics:
+🧷	Mean Absolute Error = 0.27
+🧷	R2 = 0.96
+The model can’t read minds but I think it works good🤷🏻
+
+
 
 ---
 
@@ -48,37 +59,34 @@ it's ✨aesthetic meets data science✨.
 =================================================  
 Rank | Trend Item             | Predicted Score  
 -----|------------------------|------------------  
-1    | Metallic Puffer        | 8.03  
-2    | Maxi Leather Skirt     | 7.45  
-3    | Velvet Cape            | 6.99  
-4    | Furry Bucket Hat       | 6.22  
-5    | Knit Balaclava         | 6.07  
+1    | Metallic Puffer        | 8.09  
+2    | Maxi Leather Skirt     | 7.48 
+3    | Velvet Cape            | 7.01 
+4    | Furry Bucket Hat       | 6.15  
+5    | Knit Balaclava         | 5.98 
 
-I’d wear at least 3 of these tbh.
+I’d wear at least 3 of these! Not the metallic puffer I now they will be so trendy but not my type! 💅🏻
 
 ---
 
 ## 😵‍💫 why I did this
 
-idk I like fashion and I wanted to do something that wasn’t just another boring ML tutorial. 
-I also tried to explain everything in the code comments to make it easier for others to understand (we gotta help each other out, right? 💞)
-plus I didn’t feel like scraping real trend data so I made my own ✨fake Vogue universe✨
-
-this was more about learning and having fun than being perfect.
+I’ve always been curious about combining my interests.
+This project let me combine **fashion + coding**, and it turned out to be a great learning experience.
+I tried to explain everything in the code so it's easy to follow - because sharing what we learn helps everyone 💞
+this was more about learning and having fun than being perfect🌠
 
 ---
 
 ## 🛠️ might add later
 
-- graphs?? like trend score over time or smth
-- a Streamlit interface would be cute
-- actual data from Pinterest or Google Trends (if I feel brave)
-- a better model (maybe??)
-- saving the model properly lol
+- Try more complex model like random forest or XGBoost
+- Expand the dataset and using real-world trend data
+- Build a streamlit app and turn it into my own mini pinterest
 
 ---
 
 ## 🖤 made by
 
 [@buildwithparia](https://github.com/buildwithparia)  
-aka a tired human who likes cute code and cute clothes.
+Built by Paria with Python, style, and Pinterest scrolls at 2am 💗
