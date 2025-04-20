@@ -1,124 +1,90 @@
+
 # 🧵 Runway Forecast
 
-One of the most fun experiment during my machine learning journey...sewing fashion and technology 🪡
-
-
----
-## ❓ what is this?
-
-this started as me wondering:  
-> *“what if I could predict what’s gonna be trendy next season?”*
-
-This project predict trend scores for fashion pieces based on their popularity, social buzz and aesthetic elements like fabric, color and category.
-It includes:
-- A handmade dataset of +180 fashion items across 4 seasons
-- A linear regression model trained to learn the ~vibe score~
-- A fun prediction for upcoming FW2025 fashion trends
-
-It's not perfect but I'm proud of it. ✨
-I'm here to learn and grow not to always be perfect.
+One of the most fun experiments during my ML journey… sewing fashion and code at 2 AM 🪡✨
 
 ---
 
-## ❓ what’s in the project
+## ❓ What is this?
 
-- `runway_trends.py` → generates the fashion dataset (my fake Vouge universe💫)
-- `runway_trends.csv` → the dataset with items, colors, fabrics, popularity, buzz, etc.
-- `preprocess_and_train.py` → trains & evaluates the model on trend data
-- `predict_fw25.py` → predicts trend scores for totally new FW25 items 🧥🧶
+It all started when I wondered:  
+> “What if I could predict next season’s hottest fashion pieces?”
 
----
+So I mashed together popularity, social buzz, and aesthetic vibes to build a **Trend Score** model.  
+It’s a linear regression that (mostly) tells me which runway looks will slay—and which might flop 🙈
 
-## 💻 how it works
-
-Each item has some features:
-
-- 🔥 **Season**: from Spring/Summer 2021 until Spring/Summer 2025  
-- 👗 **Trend Item**: like “maxi skirt” or “platform boots”  
-- 🧳 **Category**: like “bottom” or “accessory”  
-- 👚 **Color**: like “navy” or “blush”  
-- 🧵 **Fabric**: like “denim” or “satin”  
-- 🌀 **Previous Popularity**:  
-  a random number between 3.5 and 9.5 — reflects how popular or wearable a fashion item already is  
-  (based on past seasons, general style trends, or just its reputation)  
-- 📢 **Social Buzz**:  
-  a number from 20 to 100 — represents how much people are talking about the item on IG, TikTok, Pinterest, etc.  
-- ✨ **Trend Score**:  
-  this is a “vibe” score calculated from all the features above using this formula:
-
-  > *Trend Score = (Popularity × 0.55) + (Buzz × 0.045) + Chaos (±0.5)*
-
-
----
-I used **one-hot encoding** because I’m working with labels like color and fabric, not numbers.  
-It’s better than label or ordinal encoding in this case.
-
-I trained a **linear regression model** because it works well with numerical + encoded features.  
-The model did a good job and got these results:
-
-- 📊 **Mean Absolute Error**: 0.27  
-- 📊 **R² Score**: 0.96
-
-The model can’t read minds… but I think it works pretty well! 🧙‍♀️
-
-
+Not perfect, but very *me*. It was about learning and vibing, not building a startup.
 
 ---
 
-## 🔮 sample prediction output
+## 📂 What’s in this Repo
 
-🔥 FW25 Trend Forecast – Ranked by Predicted Score:  
-=================================================  
-Rank | Trend Item             | Predicted Score  
------|------------------------|------------------  
-1    | Metallic Puffer        | 8.09  
-2    | Maxi Leather Skirt     | 7.48 
-3    | Velvet Cape            | 7.01 
-4    | Furry Bucket Hat       | 6.15  
-5    | Knit Balaclava         | 5.98 
-
-I’d wear at least 3 of these! Not the metallic puffer I now they will be so trendy but not my type! 💅🏻
+- `runway_trends.py` → the script that generates the dataset (my fake Vogue moment)
+- `runway_trends.csv` → 180+ items with season, fabric, buzz, and more
+- `preprocess_and_train.py` → training pipeline with one-hot encoding & model fitting
+- `predict_fw25.py` → forecast FW2025 scores from new fashion entries
+- `requirements.txt` → (yeah I still need to commit this 😅)
+- `LICENSE` → just in case someone takes this too seriously
 
 ---
 
-## 😵‍💫 Why I did this
+## 💻 How It Works
 
-I’ve always been curious about combining my interests.  
-This project gave me the chance to merge **fashion** with **coding** — and I had a lot of fun doing it.
+1. Create items like "Maxi Skirt", assign features like fabric, color, popularity, buzz.
+2. One-hot encode categorical features.
+3. Train a **linear regression** model with `scikit-learn`.
+4. Predict trend scores using this formula:
 
-I also wanted to challenge myself to create something that could reflect both creativity and logic, and maybe even have a little real-world potential.
+```python
+Trend Score = (Popularity × 0.55) + (Buzz × 0.045) + Chaos (±0.5)
+```
 
----
-
-## 🌍 Why this matters
-
-Fashion isn’t just about clothes — it’s about culture, identity, and self-expression.  
-And trends? They’re not random — they reflect people’s emotions, needs, moods, and even societal shifts.
-
-A model like this, even in its early form, could one day help:
-- Small or independent designers make more confident decisions 💼  
-- Sustainable brands avoid overproduction by forecasting likely demand 🌱  
-- Retailers and stylists analyze trend movements instead of guessing 🛍️  
-- Researchers understand how style spreads across platforms like TikTok or Pinterest 📲
-
-It might be a simple linear model now, but it represents something bigger:
-> Using tech to understand people, culture, and what we wear to express who we are.
-
-So yes — I made it to learn. But I also made it to explore something meaningful ✨
-
+It’s simple, but works surprisingly well:
+- MAE: ~0.27
+- R² Score: ~0.96
 
 ---
 
-## 🛠️ might add later
+## 🔮 Sample Output
 
-- Try more complex model like random forest or XGBoost
-- Expand the dataset and using real-world trend data
-- Build a streamlit app and turn it into my own mini pinterest
+```text
+🔥 FW25 Trend Forecast:
+1    Metallic Puffer        8.09
+2    Maxi Leather Skirt     7.48
+3    Velvet Cape            7.01
+4    Furry Bucket Hat       6.15
+5    Knit Balaclava         5.98
+```
+
+I’d rock at least three of these. The metallic puffer tho… not sure she’s my vibe 😅
 
 ---
 
-## 🖤 made by
+## 💡 Why I Made This
+
+Fashion + tech = me.
+
+I wanted to explore how trends reflect culture, moods, and identity — and how a model could *kind of* understand that.
+
+Also, it was just fun. I got to play data scientist *and* fashion editor in the same night.
+
+---
+
+## 🌍 Real-World Potential
+
+This could help:
+- Indie designers make better choices
+- Sustainable brands avoid overproduction
+- Stylists and analysts predict demand instead of guessing
+
+One day, I’d love to add:
+- A better model like XGBoost or Random Forest
+- Actual real-world data
+- A streamlit app that looks like Pinterest but smarter
+
+---
+
+## 👩🏻‍💻 Made by Paria
 
 [@buildwithparia](https://github.com/buildwithparia)  
-Built by Paria with Python, style, and Pinterest scrolls at 2am 💗
-
+Built at midnight with tea, Python, and fashion daydreams 💅
