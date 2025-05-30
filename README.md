@@ -88,3 +88,9 @@ One day, I’d love to add:
 
 [@buildwithparia](https://github.com/buildwithparia)  
 Built at midnight with tea, Python, and fashion daydreams 💅
+
+## 📜 License
+
+Licensed under the [MIT License](./LICENSE).  
+Because knowledge (and code) is meant to be shared — ethically and openly 💻💫
+
